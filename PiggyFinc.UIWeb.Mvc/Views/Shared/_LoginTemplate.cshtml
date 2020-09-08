@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Index";
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Login Piggy Finc</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="@Url.Content("~/Content/images/icons/favicon.ico")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/vendor/bootstrap/css/bootstrap.min.css")">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css")">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/vendor/animate/animate.css")">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/vendor/css-hamburgers/hamburgers.min.css")">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/vendor/select2/select2.min.css")">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/util.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/main.css")">
+    <!--===============================================================================================-->
+</head>
+<body>
+    <div class="limiter" style="background-image: url('@Url.Content("~/Content/images/bg-01.png")')">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <div class="login100-pic js-tilt" data-tilt>
+                    <img src="@Url.Content("~/Content/Images/img-01.png")" alt="IMG">
+                </div>
+
+            @RenderBody()
+            @RenderSection("scripts", required: false)
+        </div>
+        </div>
+    </div>
+</body>
+</html>
