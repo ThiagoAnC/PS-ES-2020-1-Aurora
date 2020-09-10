@@ -40,6 +40,11 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
             return RedirectToAction("index", "Register", null);
         }
 
+        public ActionResult ForgetPass()
+        {
+            return RedirectToAction("index", "ForgetPass", null);
+        }
+
         private User SearchUser(string userToSearch)
         {
             User user = RepositorySearch(userToSearch);
