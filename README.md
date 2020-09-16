@@ -1,6 +1,24 @@
-# PS-ES-2020-1-Aurora
+# PIGGY FINC
+App for register of expenses and income
 
-Online bank system (but we can change it...) with some persistence.
-Here we'll add all top down software engineering project, and the functional code after.
+## About the project
 
-Feel free to comment and use our software, by giving us the correct copyrights.
+This project is based on an ASP.NET MVC app to manage personal finances. Users can use this app to record daily transactions, income and expenses. They can keep a track of their accounts, budget their income and expenses, and see a summarized of their expenses within a period of time.
+
+## Technical approach
+
+This app will use ASP.NET MVC framework version 4.  
+Database: SQLSERVER  
+IDE: Microsoft Visual Studio Community 2017
+Language: C#
+
+## Planned features
+
+1. Record expenses and income 
+2. View bill history
+3. Manage multiple accounts and currency
+4. Cost statistics and analysis
+
+## Open source license
+
+GNU GENERAL PUBLIC LICENSE Version 3
