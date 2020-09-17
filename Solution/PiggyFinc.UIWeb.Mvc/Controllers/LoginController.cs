@@ -1,4 +1,4 @@
-﻿using PiggyFinc.UIWeb.Mvc.Models;
+﻿using PiggyFinc.UIWeb.Mvc.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,6 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
         public ActionResult Index()
         {
             return View();
@@ -17,16 +16,23 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
 
         public ActionResult Entry()
         {
-            var dto = new User
+            var dto = new DtoUser
             {
                 Email = Request.Form["User"],
-                Password = Request.Form["Pass"]
+                Pass = Request.Form["Pass"]
             };
 
             var UserFromRepository = SearchUser(dto.Email);
 
-            if (UserFromRepository.Password != dto.Password )
+            if (UserFromRepository == null)
             {
+                //user not founded
+                return RedirectToAction("Index");
+            }
+
+            if (UserFromRepository.Pass != dto.Pass )
+            {
+                //password incorret
                 return RedirectToAction("Index");
             }
 
@@ -45,30 +51,21 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
             return RedirectToAction("index", "ForgetPass", null);
         }
 
-        private User SearchUser(string userToSearch)
+        private DtoUser SearchUser(string userToSearch)
         {
-            User user = RepositorySearch(userToSearch);
+            var user = new DtoUser();
 
-            if(user != null)
+            using(RepositoryUser model = new RepositoryUser())
+            {
+                user = model.Read().FirstOrDefault(registro => registro.Email == userToSearch);
+            }
+
+            if (user != null)
             {
                 return user;
             }
 
             return null;
-        }
-
-        /// <summary>
-        /// Apagar quando tiver persistencia pronta
-        /// </summary>
-        /// <param name="userToSearch"></param>
-        /// <returns></returns>
-        private User RepositorySearch(string userToSearch)
-        {
-            return new User
-            {
-                Email = "sa@pig.com",
-                Password = "admin"
-            };
         }
 
         private void CrieCookie()

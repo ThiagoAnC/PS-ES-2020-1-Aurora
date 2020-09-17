@@ -1,4 +1,4 @@
-﻿using PiggyFinc.UIWeb.Mvc.Models;
+﻿using PiggyFinc.UIWeb.Mvc.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,6 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
 {
     public class RegisterController : Controller
     {
-        // GET: Register
         public ActionResult Index()
         {
             return View();
@@ -17,10 +16,10 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
 
         public ActionResult NewUser()
         {
-            var user = new User
+            var user = new DtoUser
             {
                 Email = Request.Form["User"],
-                Password = Request.Form["Pass"]
+                Pass = Request.Form["Pass"]
             };
 
             if (AlreadyRegistered(user))
@@ -35,13 +34,31 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
             return RedirectToAction("index", "Login", null);
         }
 
-        private void RegisterNew(User user)
+        private void RegisterNew(DtoUser user)
         {
-            throw new NotImplementedException();
+            using (RepositoryUser model = new RepositoryUser())
+            {
+                model.Create(user);
+            }
         }
 
-        private bool AlreadyRegistered(User user)
+        private bool AlreadyRegistered(DtoUser user)
         {
+            var lista = new List<DtoUser>();
+
+            using (RepositoryUser model = new RepositoryUser())
+            {
+                lista = model.Read();
+            }
+
+            foreach (var registro in lista)
+            {
+                if (user.Email == registro.Email)
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
     }
