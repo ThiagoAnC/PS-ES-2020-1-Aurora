@@ -1,0 +1,91 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Poppins-Regular;
+    src: url('../fonts/abadi/abadi-mt.ttf');
+    color: white;
+}
+
+/* Float four columns side by side */
+.column {
+    float: left;
+    width: 30%;
+    margin-top: 50px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+    margin: 0 -5px;
+}
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+/* Style the counter cards */
+.card-expense {
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    width: 320px;
+    background: #fc560c;
+}
+
+.card-income {
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 320px;
+    padding: 16px;
+    background: #2cb282;
+}
+
+.card-total {
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    width: 320px;
+    background: #0070c0;
+}
+
+.scaffold {
+    position: relative;
+    margin-top: -30px;
+    border-radius: 5px;
+    padding: 16px;
+    width: 320px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background: white;
+    color: whitesmoke;
+}
+
+table {
+    width:120%;
+}
+
+
+h3 {
+    position: absolute;
+    right: 10px;
+}
+
+h8 {
+    text-align: left;
+}
+
+p {
+    color: whitesmoke;
+    font-size-adjust: 0.5;
+}
+
+td {
+    color: gray;
+    font-size-adjust: 0.4;
+}

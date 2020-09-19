@@ -3273,6 +3273,7 @@ tbody.collapse.show {
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
+  top: 2px;
 }
 
 .navbar-brand:focus, .navbar-brand:hover {

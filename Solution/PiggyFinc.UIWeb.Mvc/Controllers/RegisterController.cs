@@ -16,6 +16,11 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
 
         public ActionResult NewUser()
         {
+            if(Request.Form["Pass"] == Request.Form["Pass-Replic"])
+            {
+                return RedirectToAction("index", "Register", null);
+            }
+
             var user = new DtoUser
             {
                 Email = Request.Form["User"],
