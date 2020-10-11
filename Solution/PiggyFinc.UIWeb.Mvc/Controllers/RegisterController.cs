@@ -16,7 +16,7 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
 
         public ActionResult NewUser()
         {
-            if(Request.Form["Pass"] == Request.Form["Pass-Replic"])
+            if(Request.Form["Pass"] != Request.Form["Pass-Replic"])
             {
                 return RedirectToAction("index", "Register", null);
             }

@@ -87,5 +87,10 @@ p {
 
 td {
     color: gray;
+    text-align:left;
     font-size-adjust: 0.4;
+}
+
+input100 {
+    padding: 2px 2px 2px 2px
 }

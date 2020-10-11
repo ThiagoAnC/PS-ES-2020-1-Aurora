@@ -11,6 +11,11 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
     {
         public ActionResult Index()
         {
+            if (ExistUserLogged())
+            {
+                return RedirectToAction("Index", "Home", null);
+            }
+
             return View();
         }
 
@@ -36,7 +41,7 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
                 return RedirectToAction("Index");
             }
 
-            CrieCookie();
+            RequestCookie(dto.Email);
 
             return RedirectToAction("Index", "Home", null);
         }
@@ -68,16 +73,27 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
             return null;
         }
 
-        private void CrieCookie()
+        private void RequestCookie(string email)
         {
-            var token = Guid.NewGuid().ToString();
-
-            var cokkie = new HttpCookie("Autentication");
+            var cokkie = new HttpCookie("user");
             cokkie.Expires = DateTime.Today.AddDays(1);
-            cokkie.Value = token;
+            cokkie.Value = email;
 
             Response.Cookies.Add(cokkie);
-            Session["autentication"] = token;
+            Session["user"] = cokkie.Value;
+        }
+
+        private bool ExistUserLogged()
+        {
+            var userFromSession = Session["user"];
+            var userFromCookie = Request.Cookies["user"].Value;
+
+            if (userFromSession == userFromCookie)
+            {
+                return true;
+            }
+
+            return false;
         }
 
     }

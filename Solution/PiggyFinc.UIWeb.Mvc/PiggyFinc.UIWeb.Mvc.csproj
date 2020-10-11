@@ -125,6 +125,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Common\Repository.cs" />
     <Compile Include="Models\Transaction\DtoTransaction.cs" />
     <Compile Include="Models\Transaction\RepositoryTransaction.cs" />
     <Compile Include="Models\User\DtoUser.cs" />
@@ -264,8 +265,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\ForgetPass\Index.cshtml" />
-    <Content Include="Views\Shared\_Card.cshtml" />
-    <Content Include="Views\Shared\_EditLayout.cshtml" />
+    <Content Include="Views\Home\Transaction.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>

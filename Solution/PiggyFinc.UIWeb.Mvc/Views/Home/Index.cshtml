@@ -3,4 +3,93 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.Partial("_Card")
+<!DOCTYPE html>
+<html>
+<head>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/part.css")">
+    <!--===============================================================================================-->
+</head>
+<body>
+    <div class="row">
+        <!--=================================== Income Card =================================-->
+        <div class="column">
+            <div class="card-income">
+                <h3>R$ 1000.00</h3>
+                <h8>Total de Entradas</h8>
+                <p>Dinheiro Recebido</p>
+            </div>
+        </div>
+
+        <!--=================================== Expense Card =================================-->
+        <div class="column">
+            <div class="card-expense">
+                <h3>R$ 1000.00</h3>
+                <h8>Total de Saidas</h8>
+                <p>Dinheiro Gasto</p>
+            </div>
+        </div>
+
+        <!--=================================== Total Card =================================-->
+        <div class="column">
+            <div class="card-total">
+                <h3>R$ 1000.00</h3>
+                <h8>Total Geral</h8>
+                <p>Resultado</p>
+            </div>
+        </div>
+
+        <!--=================================== Scaffold income =================================-->
+        <div class="column">
+            <div class="scaffold">
+                @Html.ActionLink("Entradas", "Transaction", "Home", "", new { @class = "p", @style = "color: #2cb282" });
+                <br /><br />
+                <table>
+                    @for (var i = 0; i < 5; i++)
+                    {
+                        <tr>
+                            <td>Consultoria UFG</td>
+                            <td>R$ 100.00</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+        <!--=================================== Scaffold Expense =================================-->
+        <div class="column">
+            <div class="scaffold">
+                @Html.ActionLink("Saídas", "Transaction", "Home", "expense", new { @class = "p", @style = "color: #fc560c" });
+                <br /><br />
+                <table>
+                    @for (var i = 0; i < 5; i++)
+                    {
+                        <tr>
+                            <td>Consultoria UFG</td>
+                            <td>R$ 100.00</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+        <!--=================================== Scaffold Total =================================-->
+        <div class="column">
+            <div class="scaffold">
+                @Html.ActionLink("Sumário", "Transaction", "Home", new { @class = "p", @style = "color: #0070c0" });
+                <br /><br />
+                <table>
+                    @for (var i = 0; i < 5; i++)
+                    {
+                        <tr>
+                            <td>Consultoria UFG</td>
+                            <td>R$ 100.00</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

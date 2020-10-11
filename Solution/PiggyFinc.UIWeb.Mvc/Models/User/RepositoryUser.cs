@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PiggyFinc.UIWeb.Mvc.Models.Common;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -6,22 +7,10 @@ using System.Web;
 
 namespace PiggyFinc.UIWeb.Mvc.Models.User
 {
-    public class RepositoryUser : IDisposable
+    public class RepositoryUser : Repository
     {
-        private SqlConnection connection;
-
-        public RepositoryUser()
+        public RepositoryUser() : base()
         {
-            string strConn = "data source=LAPTOP-JGJDC4IB\\SQLEXPRESS;initial catalog=PIG_BASE;integrated security=True;";
-
-            connection = new SqlConnection(strConn);
-
-            connection.Open();
-        }
-
-        public void Dispose()
-        {
-            connection.Close();
         }
 
         public void Create(DtoUser user)
