@@ -17,9 +17,9 @@ namespace PiggyFinc.UIWeb.Mvc.Models.Transaction
         public DtoUser User { get; set; }
     }
 
-        public enum EnumTransaction
+    public enum EnumTransaction
     {
-        Expense = 0,
-        Income = 1,
+        Expense,
+        Income
     }
 }

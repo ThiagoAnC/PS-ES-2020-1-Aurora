@@ -1,4 +1,5 @@
 ﻿using PiggyFinc.UIWeb.Mvc.Models.Common;
+using PiggyFinc.UIWeb.Mvc.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -33,26 +34,26 @@ namespace PiggyFinc.UIWeb.Mvc.Models.Transaction
         public List<DtoTransaction> Read()
         {
             List<DtoTransaction> lista = new List<DtoTransaction>();
-            string user = HttpContext.Current.Request.Cookies["user"].Value;
+            string userFromCookie = HttpContext.Current.Request.Cookies["user"].Value;
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"SELECT * FROM TRANSACTIONS WHERE USR = '@USR'";
-            cmd.Parameters.AddWithValue("@USR", user);
+            cmd.CommandText = $"SELECT * FROM TRANSACTIONS WHERE USR = '{userFromCookie}'";
 
             SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
-
                 DtoTransaction transaction = new DtoTransaction();
                 transaction.Name = (string)reader["TRANSACTIONNAME"];
                 transaction.Category = (string)reader["TRANSACTIONSCATEGORY"];
                 transaction.Date = (DateTime)reader["TRANSACTIONDATE"];
                 transaction.Value = (decimal)reader["TRANSACTIONSVALUE"];
-                transaction.TransactionType = (EnumTransaction)reader["TRANSACTIONSTYPE"];
+
+                transaction.TransactionType = (EnumTransaction)(decimal)reader["TRANSACTIONSTYPE"];
+
                 transaction.Id = (Guid)reader["ID"];
-                transaction.User.Email = (string)reader["USR, transaction"];
+                transaction.User = new DtoUser { Email= userFromCookie };
 
                 lista.Add(transaction);
             }

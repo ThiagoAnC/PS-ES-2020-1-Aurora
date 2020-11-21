@@ -1,5 +1,4 @@
 ﻿@{
-    ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,16 +14,16 @@
         <!--=================================== Income Card =================================-->
         <div class="column">
             <div class="card-income">
-                <h3>R$ 1000.00</h3>
+                <h3>R$ @ViewBag.IncomesValue</h3>
                 <h8>Total de Entradas</h8>
-                <p>Dinheiro Recebido</p>
+                <p>Dinheiro Gasto</p>
             </div>
         </div>
 
         <!--=================================== Expense Card =================================-->
         <div class="column">
             <div class="card-expense">
-                <h3>R$ 1000.00</h3>
+                <h3>R$ @ViewBag.ExpenseValue</h3>
                 <h8>Total de Saidas</h8>
                 <p>Dinheiro Gasto</p>
             </div>
@@ -33,7 +32,7 @@
         <!--=================================== Total Card =================================-->
         <div class="column">
             <div class="card-total">
-                <h3>R$ 1000.00</h3>
+                <h3>R$ @ViewBag.Total</h3>
                 <h8>Total Geral</h8>
                 <p>Resultado</p>
             </div>
@@ -45,11 +44,11 @@
                 @Html.ActionLink("Entradas", "Transaction", "Home", "", new { @class = "p", @style = "color: #2cb282" });
                 <br /><br />
                 <table>
-                    @for (var i = 0; i < 5; i++)
+                    @foreach (var transaction in ViewBag.Incomes)
                     {
                         <tr>
-                            <td>Consultoria UFG</td>
-                            <td>R$ 100.00</td>
+                            <td>@transaction.Name</td>
+                            <td>R$ @transaction.Value</td>
                         </tr>
                     }
                 </table>
@@ -62,11 +61,11 @@
                 @Html.ActionLink("Saídas", "Transaction", "Home", "expense", new { @class = "p", @style = "color: #fc560c" });
                 <br /><br />
                 <table>
-                    @for (var i = 0; i < 5; i++)
+                    @foreach (var transaction in ViewBag.Expenses)
                     {
                         <tr>
-                            <td>Consultoria UFG</td>
-                            <td>R$ 100.00</td>
+                            <td>@transaction.Name</td>
+                            <td>R$ @transaction.Value</td>
                         </tr>
                     }
                 </table>
@@ -82,8 +81,8 @@
                     @for (var i = 0; i < 5; i++)
                     {
                         <tr>
-                            <td>Consultoria UFG</td>
-                            <td>R$ 100.00</td>
+                            <td>Diferença</td>
+                            <td>R$ @ViewBag.Total</td>
                         </tr>
                     }
                 </table>

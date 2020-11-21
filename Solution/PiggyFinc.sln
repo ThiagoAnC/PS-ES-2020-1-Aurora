@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1082
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiggyFinc.UIWeb.Mvc", "PiggyFinc.UIWeb.Mvc\PiggyFinc.UIWeb.Mvc.csproj", "{A579FA5F-90AC-4840-8824-0E39B9F93209}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PigHelpers", "PigHelpers\PigHelpers.csproj", "{4860C4AB-8BD8-44B8-90DC-DA144CCF7B04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A579FA5F-90AC-4840-8824-0E39B9F93209}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A579FA5F-90AC-4840-8824-0E39B9F93209}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A579FA5F-90AC-4840-8824-0E39B9F93209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4860C4AB-8BD8-44B8-90DC-DA144CCF7B04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4860C4AB-8BD8-44B8-90DC-DA144CCF7B04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4860C4AB-8BD8-44B8-90DC-DA144CCF7B04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4860C4AB-8BD8-44B8-90DC-DA144CCF7B04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

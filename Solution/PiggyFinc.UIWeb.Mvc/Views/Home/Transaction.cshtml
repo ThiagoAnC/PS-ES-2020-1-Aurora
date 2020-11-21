@@ -17,7 +17,7 @@
         <!--=================================== Top Card =================================-->
         <div class="column">
             <div class="card-income" style="width:200%">
-                <i class="fas fa-plus-circle" style="float:right;margin:8px 150px"></i>
+                <a href="@Url.Action("Edit", "Home")"><i class="fas fa-plus-circle" style="float:right;margin:8px 150px;color:white"></i></a>
                 <h3>R$ 1000.00</h3>
                 <h8>Total de Entradas</h8>
                 <p>Dinheiro Recebido</p>
@@ -45,14 +45,13 @@
                         <td>R$ 100.00</td>
                         <td>R$ 100.00</td>
                         <td>
-                            <i class="fas fa-edit" style="padding: 0 3px"></i>
-                            <i class="fas fa-trash-alt"></i>
+                            <a href="@Url.Action("Edit", "Home")"><i class="fas fa-edit" style="padding: 0 3px"></i></a>
+                            <a href="@Url.Action("Edit", "Home")"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 }
             </table>
         </div>
-    </div>
     </div>
 </body>
 </html>

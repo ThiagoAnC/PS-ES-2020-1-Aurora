@@ -11,13 +11,7 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.TopTitle = "Dashboard";
-
-            using(var repo = new RepositoryTransaction())
-            {
-                var list = repo.Read();
-            }
-
+            PrepareDashboard();
             return View();
         }
 
@@ -28,7 +22,50 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
 
         public ActionResult Edit()
         {
+            var transaction = new DtoTransaction
+            {
+                Category = Request.Form["category"],//pegar da tela de edite o dto de quem vai ser editado e o ID
+            };
             return View();
         }
+
+        #region PrivateMethods
+        private void PrepareDashboard()
+        {
+            ViewBag.TopTitle = "Dashboard";
+
+            var transactions = ReadTransactionsFromUser();
+
+            ViewBag.Incomes = transactions.Where(x => x.TransactionType == EnumTransaction.Income).ToList();
+            ViewBag.Expenses = transactions.Where(x => x.TransactionType == EnumTransaction.Expense).ToList();
+            ViewBag.transactions = transactions;
+
+            ViewBag.IncomesValue = GetTransactionsValues(ViewBag.Incomes);
+            ViewBag.ExpenseValue = GetTransactionsValues(ViewBag.Expenses);
+            ViewBag.Total = ViewBag.IncomesValue - ViewBag.ExpenseValue;
+        }
+
+        private IList<DtoTransaction> ReadTransactionsFromUser()
+        {
+            using (var repository = new RepositoryTransaction())
+            {
+                return repository.Read();
+            }
+        }
+
+        private decimal GetTransactionsValues(IList<DtoTransaction> transactions)
+        {
+            decimal result = 0;
+
+            foreach(var transaction in transactions)
+            {
+                result =+ transaction.Value;
+            }
+
+            return result;
+        }
+
+
+        #endregion
     }
 }
