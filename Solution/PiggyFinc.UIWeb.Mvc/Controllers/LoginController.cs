@@ -85,13 +85,8 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
 
         private bool ExistUserLogged()
         {
-            if (Request.Cookies["user"] == null)
-            {
-                return false;
-            }
-
-            var userFromCookie = Request.Cookies["user"].Value;
             var userFromSession = Session["user"];
+            var userFromCookie = "None";
 
             if (userFromSession == userFromCookie)
             {
