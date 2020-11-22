@@ -51,6 +51,16 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
             return RedirectToAction("index", "Register", null);
         }
 
+        public ActionResult Quit()
+        {
+            if (Request.Cookies["user"] != null)
+            {
+                Response.Cookies["user"].Value = string.Empty;
+            }
+
+            return RedirectToAction("Index", "Login", null);
+        }
+
         public ActionResult ForgetPass()
         {
             return RedirectToAction("index", "ForgetPass", null);
@@ -85,12 +95,12 @@ namespace PiggyFinc.UIWeb.Mvc.Controllers
 
         private bool ExistUserLogged()
         {
-            var userFromSession = Session["user"];
-            var userFromCookie = "None";
-
-            if (userFromSession == userFromCookie)
+            if (Request.Cookies["user"] != null)
             {
-                return true;
+                if (Request.Cookies["user"].Value != string.Empty)
+                {
+                    return true;
+                }
             }
 
             return false;
