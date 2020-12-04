@@ -20,6 +20,7 @@ Edit Screen: https://www.pastefile.com/ampmtu
 This app will use ASP.NET MVC framework version 4.  
 Database: SQLSERVER  
 IDE: Microsoft Visual Studio Community 2017
+
 Language: C#
 
 ## Planned features
