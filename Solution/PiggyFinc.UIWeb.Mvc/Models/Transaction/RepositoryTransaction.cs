@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace PiggyFinc.UIWeb.Mvc.Models.Transaction
@@ -14,19 +15,16 @@ namespace PiggyFinc.UIWeb.Mvc.Models.Transaction
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"INSERT INTO TRANSACTIONS VALUES 
-                               (@TRANSACTIONNAME, @TRANSACTIONSCATEGORY
-                                @TRANSACTIONDATE, @TRANSACTIONSVALUE
-                                @TRANSACTIONSTYPE, @ID
-                                @USR)";
 
-            cmd.Parameters.AddWithValue("@TRANSACTIONNAME", transaction.Name);
-            cmd.Parameters.AddWithValue("@TRANSACTIONSCATEGORY", transaction.Category);
-            cmd.Parameters.AddWithValue("@TRANSACTIONDATE", transaction.Date);
-            cmd.Parameters.AddWithValue("@TRANSACTIONSVALUE", transaction.Value);
-            cmd.Parameters.AddWithValue("@TRANSACTIONSTYPE", (int)transaction.TransactionType);
-            cmd.Parameters.AddWithValue("@ID", transaction.Id);
-            cmd.Parameters.AddWithValue("@USR", transaction.User.Email);
+            cmd.CommandText = String.Format(
+                "INSERT INTO TRANSACTIONS VALUES('{0}','{1}','{2}',{3},{4},'{5}','{6}')",
+                 transaction.Name,
+                 transaction.Category,
+                 transaction.Date.ToString("yyyy-MM-dd"),
+                 transaction.Value,
+                 (int)transaction.TransactionType,
+                 transaction.Id,
+                 transaction.User);
 
             cmd.ExecuteNonQuery();
         }
@@ -52,8 +50,8 @@ namespace PiggyFinc.UIWeb.Mvc.Models.Transaction
 
                 transaction.TransactionType = (EnumTransaction)(decimal)reader["TRANSACTIONSTYPE"];
 
-                transaction.Id = (Guid)reader["ID"];
-                transaction.User = new DtoUser { Email= userFromCookie };
+                transaction.Id = Guid.Parse((string)reader["ID"]);
+                transaction.User = userFromCookie;
 
                 lista.Add(transaction);
             }
@@ -65,19 +63,12 @@ namespace PiggyFinc.UIWeb.Mvc.Models.Transaction
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"UPDATE TRANSACTIONS SET 
-                                TRANSACTIONNAME=@TRANSACTIONNAME 
-                                TRANSACTIONSCATEGORY=@TRANSACTIONSCATEGORY
-                                TRANSACTIONDATE=@TRANSACTIONDATE
-                                TRANSACTIONSVALUE=@TRANSACTIONSVALUE
-                                TRANSACTIONSTYPE=@TRANSACTIONSTYPE
-                                WHERE ID=@ID";
-
-            cmd.Parameters.AddWithValue("@TRANSACTIONNAME", transaction.Name);
-            cmd.Parameters.AddWithValue("@TRANSACTIONSCATEGORY", transaction.Category);
-            cmd.Parameters.AddWithValue("@TRANSACTIONDATE", transaction.Date);
-            cmd.Parameters.AddWithValue("@TRANSACTIONSVALUE", transaction.Value);
-            cmd.Parameters.AddWithValue("@TRANSACTIONSTYPE", (int)transaction.TransactionType);
+            cmd.CommandText = String.Format(
+                "UPDATE TRANSACTIONS SET TRANSACTIONNAME='{0}', TRANSACTIONSCATEGORY='{1}', TRANSACTIONSVALUE='{2}' WHERE ID = '{3}'",
+                 transaction.Name,
+                 transaction.Category,
+                 transaction.Value,
+                 transaction.Id);
 
             cmd.ExecuteNonQuery();
         }
@@ -86,9 +77,7 @@ namespace PiggyFinc.UIWeb.Mvc.Models.Transaction
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = @"DELETE FROM TRANSACTIONS WHERE ID=@ID";
-
-            cmd.Parameters.AddWithValue("@ID", transaction.Id);
+            cmd.CommandText = string.Format("DELETE FROM TRANSACTIONS WHERE ID='{0}'",transaction.Id);
 
             cmd.ExecuteNonQuery();
         }

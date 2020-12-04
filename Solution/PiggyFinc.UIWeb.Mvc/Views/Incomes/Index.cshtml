@@ -1,6 +1,8 @@
-﻿
+﻿@using System.Globalization;
+@model PiggyFinc.UIWeb.Mvc.Models.Transaction.DtoTransaction
+
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Incomes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -17,8 +19,8 @@
         <!--=================================== Top Card =================================-->
         <div class="column">
             <div class="card-income" style="width:200%">
-                <a href="@Url.Action("Edit", "Home")"><i class="fas fa-plus-circle" style="float:right;margin:8px 150px;color:white"></i></a>
-                <h3>R$ 1000.00</h3>
+                <a href="@Url.Action("Edit")"><i class="fas fa-plus-circle" style="float:right;margin:8px 150px;color:white"></i></a>
+                <h3>@ViewBag.IncomesValue.ToString("C2", CultureInfo.CurrentCulture)</h3>
                 <h8>Total de Entradas</h8>
                 <p>Dinheiro Recebido</p>
             </div>
@@ -38,15 +40,15 @@
                     <td>Ação</td>
                     <td style="color: whitesmoke">values</td>
                 </ts>
-                @for (var i = 0; i < 5; i++)
+                @foreach (var transaction in ViewBag.Incomes)
                 {
                     <tr>
-                        <td>Consultoria UFG</td>
-                        <td>R$ 100.00</td>
-                        <td>R$ 100.00</td>
+                        <td>@transaction.Name</td>
+                        <td>@transaction.Category</td>
+                        <td>@transaction.Value.ToString("C2", CultureInfo.CurrentCulture)</td>
                         <td>
-                            <a href="@Url.Action("Edit", "Home")"><i class="fas fa-edit" style="padding: 0 3px"></i></a>
-                            <a href="@Url.Action("Edit", "Home")"><i class="fas fa-trash-alt"></i></a>
+                            <a href="@Url.Action("Edit", transaction)"><i class="fas fa-edit" style="padding: 0 3px"></i></a>
+                            <a href="@Url.Action("Delete", transaction)"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 }

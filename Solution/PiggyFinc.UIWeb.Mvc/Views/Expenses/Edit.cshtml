@@ -1,0 +1,43 @@
+﻿@model PiggyFinc.UIWeb.Mvc.Models.Transaction.DtoTransaction
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/part.css")">
+    <script src="https://kit.fontawesome.com/c6fba2bf0c.js" crossorigin="anonymous"></script>
+    <!--===============================================================================================-->
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <!--=================================== Top Card =================================-->
+            <div class="column">
+                <div class="card-expense" style="width:100%">
+                    <i class="fas fa-save"></i>
+                    <button type="submit" style="color:#ffffff">Salvar</button>
+                    <i class="fas fa-window-close" style="margin-left:12px"></i>
+                    @Html.ActionLink("Cancelar", "Index", null, null, new { @class = "h8", @style = "color: #FFFFFF" })
+                </div>
+            </div>
+        </div>
+
+        <!--=================================== Scaffold =================================-->
+        <div class="column">
+            <div class="scaffold" style="width:100%">
+                <p style="color: #2cb282">Editar</p><br />
+                @Html.TextBoxFor(x => x.Name, new { @class = "input100", @style = "font-size-adjust:0.5; padding:0 20px", @placeholder = "Descrição" })<br />
+                @Html.TextBoxFor(x => x.Category, new { @class = "input100", @style = "font-size-adjust:0.5; padding:0 20px", @placeholder = "Categoria" })<br />
+                @Html.TextBoxFor(x => x.Value, new { @class = "input100", @style = "font-size-adjust:0.5; padding:0 20px", @placeholder = "Valor" })<br />
+            </div>
+        </div>
+    }   
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿@using System.Globalization;
+@model PiggyFinc.UIWeb.Mvc.Models.Transaction.DtoTransaction
+
+@{
+    ViewBag.Title = "Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/part.css")">
+    <script src="https://kit.fontawesome.com/c6fba2bf0c.js" crossorigin="anonymous"></script>
+    <!--===============================================================================================-->
+</head>
+<body>
+    <div class="row">
+        <!--=================================== Top Card =================================-->
+        <div class="column">
+            <div class="card-expense" style="width:200%">
+                <a href="@Url.Action("Edit")"><i class="fas fa-plus-circle" style="float:right;margin:8px 150px;color:white"></i></a>
+                <h3>@ViewBag.ExpensesValue.ToString("C2", CultureInfo.CurrentCulture)</h3>
+                <h8>Total de Entradas</h8>
+                <p>Dinheiro Recebido</p>
+            </div>
+        </div>
+    </div>
+
+    <!--=================================== Scaffold =================================-->
+    <div class="column">
+        <div class="scaffold" style="width:200%">
+            <p style="color: #2cb282">Ultimos Lançamentos</p>
+            <br />
+            <table>
+                <ts>
+                    <td>Descrição</td>
+                    <td>Categoria</td>
+                    <td>Valor</td>
+                    <td>Ação</td>
+                    <td style="color: whitesmoke">values</td>
+                </ts>
+                @foreach (var transaction in ViewBag.Expenses)
+                {
+                    <tr>
+                        <td>@transaction.Name</td>
+                        <td>@transaction.Category</td>
+                        <td>@transaction.Value.ToString("C2", CultureInfo.CurrentCulture)</td>
+                        <td>
+                            <a href="@Url.Action("Edit", transaction)"><i class="fas fa-edit" style="padding: 0 3px"></i></a>
+                            <a href="@Url.Action("Delete", transaction)"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</body>
+</html>

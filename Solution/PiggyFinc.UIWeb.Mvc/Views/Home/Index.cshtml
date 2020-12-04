@@ -8,6 +8,10 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/part.css")">
     <!--===============================================================================================-->
+    <script type="text/javascript">
+            var incomesValue = @ViewBag.IncomesValue;
+            var ExpenseValue = @ViewBag.ExpenseValue;
+    </script>
 </head>
 <body>
     <div class="row">
@@ -31,7 +35,7 @@
 
         <!--=================================== Total Card =================================-->
         <div class="column">
-            <div class="card-total">
+            <div class="card-total" style="width: 150%">
                 <h3>R$ @ViewBag.Total</h3>
                 <h8>Total Geral</h8>
                 <p>Resultado</p>
@@ -41,7 +45,7 @@
         <!--=================================== Scaffold income =================================-->
         <div class="column">
             <div class="scaffold">
-                @Html.ActionLink("Entradas", "Transaction", "Home", "", new { @class = "p", @style = "color: #2cb282" });
+                @Html.ActionLink("Entradas", "Index", "Incomes", "", new { @class = "p", @style = "color: #2cb282" });
                 <br /><br />
                 <table>
                     @foreach (var transaction in ViewBag.Incomes)
@@ -58,7 +62,8 @@
         <!--=================================== Scaffold Expense =================================-->
         <div class="column">
             <div class="scaffold">
-                @Html.ActionLink("Saídas", "Transaction", "Home", "expense", new { @class = "p", @style = "color: #fc560c" });
+                @Html.ActionLink("Saidas", "Index", "Expenses", "", new { @class = "p", @style = "color: #fc560c" });
+
                 <br /><br />
                 <table>
                     @foreach (var transaction in ViewBag.Expenses)
@@ -74,18 +79,51 @@
 
         <!--=================================== Scaffold Total =================================-->
         <div class="column">
-            <div class="scaffold">
-                @Html.ActionLink("Sumário", "Transaction", "Home", new { @class = "p", @style = "color: #0070c0" });
-                <br /><br />
-                <table>
-                    @for (var i = 0; i < 5; i++)
-                    {
-                        <tr>
-                            <td>Diferença</td>
-                            <td>R$ @ViewBag.Total</td>
-                        </tr>
+            <div class="scaffold" style="width: 150%">
+                @Html.ActionLink("Sumário", null, null, new { @class = "p", @style = "color: #0070c0" });
+
+                <!-- Styles -->
+                <style>
+                    #chartdiv {
+                        width: 100%;
+                        height: 150px;
                     }
-                </table>
+                </style>
+
+                <!-- Resources -->
+                <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+                <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+                <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+                <!-- Chart code -->
+                <script>
+                                        am4core.ready(function () {
+
+                                            am4core.useTheme(am4themes_animated);
+                                            var chart = am4core.create("chartdiv", am4charts.PieChart);
+                                            chart.data = [{
+                                                "Transaction": "Expenses",
+                                                "Money": ExpenseValue
+                                            }, {
+                                                "Transaction": "Incomes",
+                                                "Money": incomesValue
+                                            }];
+
+                                            var pieSeries = chart.series.push(new am4charts.PieSeries());
+                                            pieSeries.dataFields.value = "Money";
+                                            pieSeries.dataFields.category = "Transaction";
+                                            pieSeries.slices.template.stroke = am4core.color("#fff");
+                                            pieSeries.slices.template.strokeWidth = 2;
+                                            pieSeries.slices.template.strokeOpacity = 1;
+
+                                            pieSeries.hiddenState.properties.opacity = 1;
+                                            pieSeries.hiddenState.properties.endAngle = -90;
+                                            pieSeries.hiddenState.properties.startAngle = -90;
+
+                                        });
+                </script>
+                <div id="chartdiv"></div>
+
             </div>
         </div>
 
