@@ -7,9 +7,13 @@ This project is based on an ASP.NET MVC app to manage personal finances. Users c
 
 ## Screenshots
 Login Screen: https://www.pastefile.com/86t45c
+
 Dashboard: https://www.pastefile.com/a8hcpc
+
 Read Screen: https://www.pastefile.com/bwzknq
+
 Edit Screen: https://www.pastefile.com/ampmtu
+
 
 ## Technical approach
 
